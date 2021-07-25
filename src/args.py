@@ -86,6 +86,7 @@ class Args():
 
 
 
+# -todo 1 (clean, args) +0: make reliable args priority: defaults > .ini > cmdline
 	def parseCmdline(self, _softDefs):
 		cParser = argparse.ArgumentParser(description= 'PySide Template')
 
