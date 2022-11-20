@@ -1,3 +1,5 @@
+from Args import *
+
 from .AppWindow import *
 
 
@@ -7,13 +9,11 @@ class Ui():
 	appWindow = None
 
 
-	def __init__(self, _args):
-		self.args = _args
-
+	def __init__(self):
 
 		#init
-		self.appWindow = AppWindow(_args.args['tool'])
-		self.appWindow.setContent(_args.args['inStr'])
+		self.appWindow = AppWindow(Args.Cmdline.tool)
+		self.appWindow.setContent(Args.Cmdline.msg)
 
 
 		self.appWindow.exec()

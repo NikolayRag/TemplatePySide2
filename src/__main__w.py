@@ -1,9 +1,20 @@
 import Ui
-from args import *
+from Args import *
 
+
+AppPrefs = {
+	'Application': {
+		'wSize': [None],
+		'wPos': [None],
+		'wMaxi': [False],
+	},
+	'Cmdline': {
+		'tool': [0],
+		'msg': ['pwned'],
+	}
+}
 
 if __name__ == '__main__':
-	cArgs= Args(True)
+	Args(AppPrefs, 'TemplatePySide', 'Cmdline')
 
-	if cArgs.args:
-		Ui.Ui(cArgs)
+	Ui.Ui()
