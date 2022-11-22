@@ -8,6 +8,8 @@ a = Analysis(['src/__main__w.py'],
 	binaries=None,
 	datas=[
 		('src/Ui/AppWindow.ui', 'Ui'),
+		('src/Ui/icons/icon-app.svg', 'Ui/icons'),
+		('src/Ui/styles/default.qss', 'Ui/styles'),
 #		('bin/bin.exe','src/bin/bin.exe','DATA'),
 	],
 	hiddenimports=['PySide2.QtXml'],
@@ -30,5 +32,5 @@ exe = EXE(pyz,
           debug=False,
           strip=False,
           upx=True,
-          console=True )
+          console=False )
  
