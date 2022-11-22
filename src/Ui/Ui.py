@@ -26,7 +26,7 @@ class Ui():
 		cSize = cSize or QApplication.primaryScreen().size()
 
 
-		self.appWindow = AppWindow(Args.Cmdline.tool)
+		self.appWindow = AppWindow(Args.Cmdline.tool, Args.Cmdline.dnd)
 		self.appWindow.setStyle(f"{self.modulePath}/schemes/default.qss")
 		self.appWindow.setContent(Args.Cmdline.msg)
 		self.appWindow.windowGeometry(cSize, cPos, Args.Application.wMaxi)

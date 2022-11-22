@@ -109,9 +109,16 @@ class AppWindow(QObject):
 
 
 
+	def dropped(self, _e):
+		logging.warning(_e.mimeData().urls())
+
+
+
 #########
 
-	def __init__(self, _isTool=False):
+
+
+	def __init__(self, _isTool=False, _isDnd=False):
 		QObject.__init__(self)
 
 
@@ -143,6 +150,15 @@ class AppWindow(QObject):
 			self.wCaption.installEventFilter( QWinFilter(cMain) )
 
 
+		if _isDnd:
+			logging.warning('Dnd on')
+
+			BindFilter({
+					QEvent.DragEnter: lambda e: e.acceptProposedAction(),
+					QEvent.Drop: self.dropped,
+			 	},
+			 	cMain
+		 	)
 
 
 
