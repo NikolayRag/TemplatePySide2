@@ -1,4 +1,6 @@
 from os import path
+import logging
+
 
 from PySide2.QtCore import *
 from PySide2.QtGui import *
@@ -50,12 +52,48 @@ class AppWindow():
 
 
 
+	def ynBox(self, _txt, _txtQ, btnYes, btnNo, yesno=False):
+		msgBox = QMessageBox()
+		msgBox.setText(_txt)
+		msgBox.setInformativeText(_txtQ)
+		msgBox.setStandardButtons(btnYes | btnNo)
+		msgBox.setDefaultButton(btnNo)
+		if msgBox.exec() == (btnYes if yesno else btnNo):
+			return True
+
+
+########## -support
+
+
+
+	def tryExit(self, event):
+		if self.ynBox("Out", "Maybe not?", QMessageBox.Ok, QMessageBox.Cancel):
+			event.ignore()
+
+		if event.isAccepted():
+			logging.warning('left')
+		else:
+			logging.warning('stay')
+
+
+		return True
+
+
+
+#########
+
 	def __init__(self, _isTool=False):
 		self.qApp = QApplication()
 		self.qApp.setStyle(QStyleFactory.create('plastique'))
 
 		uiFile = path.join(self.modulePath,'AppWindow.ui')
 		cMain = self.wMain = QUiLoader().load(uiFile)
+
+		BindFilter({
+				QEvent.Close: self.tryExit,
+		 	},
+		 	cMain
+		 )
 
 
 		#capture widgets
