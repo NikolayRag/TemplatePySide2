@@ -26,9 +26,8 @@ class Ui():
 
 
 
-	def initTray(self, _win):
+	def initTray(self):
 		self.trayIcon = QSystemTrayIcon(QIcon(self.resIcon))
-		self.trayIcon.activated.connect(_win.miniTray)
 
 		self.trayIcon.show()
 
@@ -70,7 +69,10 @@ class Ui():
 
 		appWin = self.windowStart()
 		if Args.Cmdline.tray:
-			self.initTray(appWin)
+			self.initTray()
+
+			self.trayIcon.activated.connect(appWin.miniTray)
+
 
 		appWin.setContent(Args.Cmdline.msg)
 
