@@ -13,18 +13,21 @@ class Ui():
 
 	qApp = None
 
-	appWindow = None
 
 
 
-	def __init__(self, appName=None):
+	def initApp(self, _appName):
 		self.qApp = QApplication()
 		self.qApp.setStyle(QStyleFactory.create('fusion'))
 		self.qApp.setWindowIcon(QIcon(self.resIcon))
-		if appName:
-			self.qApp.setApplicationName(appName)
+		if _appName:
+			self.qApp.setApplicationName(_appName)
 
-		#read geo
+
+
+
+
+	def windowStart(self):
 		cPos = Args.Application.wPos and QPoint(*Args.Application.wPos)
 		cPos = cPos or QPoint(0,0)
 
@@ -32,25 +35,42 @@ class Ui():
 		cSize = cSize or QApplication.primaryScreen().size()
 
 
-		self.appWindow = AppWindow(
+		appWindow = AppWindow(
 			self.resUi,
 			resStyle=self.resStyle,
 			isTool=Args.Cmdline.tool,
 			isDnd=Args.Cmdline.dnd
 		)
-		self.appWindow.setContent(Args.Cmdline.msg)
-		self.appWindow.windowGeometry(cSize, cPos, Args.Application.wMaxi)
+		appWindow.windowGeometry(cSize, cPos, Args.Application.wMaxi)
 
 
-		self.appWindow.show()
-		self.qApp.exec_()
+		return appWindow
 
 
-		#store geo
-		wSize = self.appWindow.windowGeometry()
+
+	def windowSave(self, _window):
+		wSize = _window.windowGeometry()
 		Args.Application.wSize = (wSize[0].width(), wSize[0].height())
 		Args.Application.wPos = (wSize[1].x(), wSize[1].y())
 		Args.Application.wMaxi = wSize[2]
+
+
+
+	def __init__(self, appName=None):
+		self.initApp(appName)
+
+		if Args.Cmdline.tray:
+			self.initTray()
+
+
+		appWin = self.windowStart()
+
+		appWin.setContent(Args.Cmdline.msg)
+
+		appWin.show()
+		self.qApp.exec_()
+
+		self.windowSave(appWin)
 
 
 		logging.warning('Exiting')
