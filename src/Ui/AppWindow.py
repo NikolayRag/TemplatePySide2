@@ -39,7 +39,7 @@ class QWinFilter(QObject):
 
 
 
-class AppWindow():
+class AppWindow(QObject):
 	modulePath= path.abspath(path.dirname(__file__))
 
 
@@ -83,8 +83,8 @@ class AppWindow():
 #########
 
 	def __init__(self, _isTool=False):
-		self.qApp = QApplication()
-		self.qApp.setStyle(QStyleFactory.create('plastique'))
+		QObject.__init__(self)
+
 
 		uiFile = path.join(self.modulePath,'AppWindow.ui')
 		cMain = self.wMain = QUiLoader().load(uiFile)
@@ -113,14 +113,9 @@ class AppWindow():
 
 
 
-	'''
-	Display UI and enter QT app loop
-	'''
-	def exec(self):
+	def show(self):
 		self.wMain.show()
 
-
-		self.qApp.exec_()
 
 
 	def setContent(self, _content):
