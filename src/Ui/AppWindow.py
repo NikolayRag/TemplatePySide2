@@ -12,9 +12,6 @@ from .BindFilter import *
 
 
 class AppWindow(QObject):
-	modulePath= path.abspath(path.dirname(__file__))
-
-
 	mouseGrabOffset= None
 
 
@@ -102,12 +99,13 @@ class AppWindow(QObject):
 
 
 
-	def __init__(self, _isTool=False, _isDnd=False):
+	def __init__(self, resUi, resStyle=None, isTool=False, isDnd=False):
 		QObject.__init__(self)
 
 
-		uiFile = path.join(self.modulePath,'AppWindow.ui')
-		cMain = self.wMain = QUiLoader().load(uiFile)
+		cMain = self.wMain = QUiLoader().load(resUi)
+		if resStyle:
+			self.setStyle(resStyle)
 
 
 		BindFilter({
@@ -127,7 +125,7 @@ class AppWindow(QObject):
 
 		
 
-		if _isTool:
+		if isTool:
 			logging.warning('Tool mode')
 
 			cMain.setWindowFlags(Qt.FramelessWindowHint)
@@ -142,7 +140,7 @@ class AppWindow(QObject):
 
 
 
-		if _isDnd:
+		if isDnd:
 			logging.warning('Dnd on')
 
 			BindFilter({

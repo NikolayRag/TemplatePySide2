@@ -6,6 +6,10 @@ from .AppWindow import *
 class Ui():
 	modulePath= path.abspath(path.dirname(__file__))
 
+	resUi = path.join(modulePath,'AppWindow.ui')
+	resIcon = path.join(modulePath,'icons/icon-app.svg')
+	resStyle = path.join(modulePath,'styles/default.qss')
+
 
 	qApp = None
 
@@ -26,8 +30,12 @@ class Ui():
 		cSize = cSize or QApplication.primaryScreen().size()
 
 
-		self.appWindow = AppWindow(Args.Cmdline.tool, Args.Cmdline.dnd)
-		self.appWindow.setStyle(f"{self.modulePath}/schemes/default.qss")
+		self.appWindow = AppWindow(
+			self.resUi,
+			resStyle=self.resStyle,
+			isTool=Args.Cmdline.tool,
+			isDnd=Args.Cmdline.dnd
+		)
 		self.appWindow.setContent(Args.Cmdline.msg)
 		self.appWindow.windowGeometry(cSize, cPos, Args.Application.wMaxi)
 
