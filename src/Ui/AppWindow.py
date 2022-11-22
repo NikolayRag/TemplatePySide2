@@ -37,10 +37,12 @@ class QWinFilter(QObject):
 
 
 class AppWindow():
+	modulePath= path.abspath(path.dirname(__file__))
+
+
 	qApp = None
 
 
-	modulePath= path.abspath(path.dirname(__file__))
 	wMain = None
 	wCaption = None
 	wContent = None
