@@ -10,6 +10,7 @@ AppPrefs = {
 	},
 	'Cmdline': {
 		'tool': [0],
+		'tray': [0],
 		'dnd': [0],
 		'msg': ['pwned'],
 	}

@@ -99,7 +99,7 @@ class AppWindow(QObject):
 
 
 
-	def __init__(self, resUi, resStyle=None, isTool=False, isDnd=False):
+	def __init__(self, resUi, resStyle=None, isTray=False, isTool=False, isDnd=False):
 		QObject.__init__(self)
 
 
@@ -113,9 +113,9 @@ class AppWindow(QObject):
 				QEvent.Move: self.moved,
 				QEvent.Resize: self.resized,
 				QEvent.WindowStateChange: self.maximized,
-		 	},
-		 	cMain
-		 )
+			},
+			cMain
+		)
 
 
 		#capture widgets
@@ -142,6 +142,12 @@ class AppWindow(QObject):
 		 	self.wCaption.hide()
 
 
+		if isTray: #override minimize
+			BindFilter({
+					QEvent.WindowStateChange: lambda e: self.wMain.isMinimized() and self.miniTray(True),
+			 	},
+			 	cMain
+			 )
 
 
 		if isDnd:
@@ -158,6 +164,18 @@ class AppWindow(QObject):
 
 	def show(self):
 		self.wMain.show()
+	
+
+
+	def miniTray(self, _state):
+		if _state:
+			logging.warning('to tray')
+			QTimer.singleShot(0, self.wMain.hide)
+
+		else:
+			logging.warning('from tray')
+			self.show()
+			self.wMain.showNormal()
 
 
 

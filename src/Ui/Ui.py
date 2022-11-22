@@ -13,6 +13,7 @@ class Ui():
 
 	qApp = None
 
+	trayIcon = None
 
 
 
@@ -24,6 +25,12 @@ class Ui():
 			self.qApp.setApplicationName(_appName)
 
 
+
+	def initTray(self, _win):
+		self.trayIcon = QSystemTrayIcon(QIcon(self.resIcon))
+		self.trayIcon.activated.connect(lambda r: r==QSystemTrayIcon.Trigger and _win.miniTray(False))
+
+		self.trayIcon.show()
 
 
 
@@ -39,6 +46,7 @@ class Ui():
 			self.resUi,
 			resStyle=self.resStyle,
 			isTool=Args.Cmdline.tool,
+			isTray=Args.Cmdline.tray,
 			isDnd=Args.Cmdline.dnd
 		)
 		appWindow.windowGeometry(cSize, cPos, Args.Application.wMaxi)
@@ -59,15 +67,15 @@ class Ui():
 	def __init__(self, appName=None):
 		self.initApp(appName)
 
-		if Args.Cmdline.tray:
-			self.initTray()
-
 
 		appWin = self.windowStart()
+		if Args.Cmdline.tray:
+			self.initTray(appWin)
 
 		appWin.setContent(Args.Cmdline.msg)
 
 		appWin.show()
+
 		self.qApp.exec_()
 
 		self.windowSave(appWin)
