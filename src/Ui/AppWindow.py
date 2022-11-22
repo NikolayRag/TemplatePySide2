@@ -43,7 +43,6 @@ class AppWindow(QObject):
 	modulePath= path.abspath(path.dirname(__file__))
 
 
-	qApp = None
 
 
 	wMain = None
