@@ -17,10 +17,12 @@ class Ui():
 
 
 
-	def __init__(self):
+	def __init__(self, appName=None):
 		self.qApp = QApplication()
 		self.qApp.setStyle(QStyleFactory.create('fusion'))
 
+		if appName:
+			self.qApp.setApplicationName(appName)
 
 		#read geo
 		cPos = Args.Application.wPos and QPoint(*Args.Application.wPos)

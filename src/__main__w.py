@@ -18,4 +18,4 @@ AppPrefs = {
 if __name__ == '__main__':
 	Args(AppPrefs, 'TemplatePySide', 'Cmdline')
 
-	Ui.Ui()
+	Ui.Ui('TemplatePySide')
