@@ -25,6 +25,9 @@ class AppWindow(QObject):
 	wContent = None
 
 
+	flagCheckExit = True
+
+
 
 	def ynBox(self, _txt, _txtQ, btnYes, btnNo, yesno=False):
 		msgBox = QMessageBox()
@@ -68,6 +71,10 @@ class AppWindow(QObject):
 
 
 	def tryExit(self, event):
+		if not self.flagCheckExit:
+			return
+
+
 		if self.ynBox("Out", "Maybe not?", QMessageBox.Ok, QMessageBox.Cancel):
 			event.ignore()
 
@@ -142,12 +149,14 @@ class AppWindow(QObject):
 		 	self.wCaption.hide()
 
 
+
 		if isTray: #override minimize
 			BindFilter({
 					QEvent.WindowStateChange: lambda e: self.miniTray(),
 			 	},
 			 	cMain
 			 )
+
 
 
 		if isDnd:
@@ -186,6 +195,11 @@ class AppWindow(QObject):
 	def setStyle(self, _styleFile):
 		with open(_styleFile) as fQss:
 			self.wMain.setStyleSheet(fQss.read())
+
+
+
+	def setCheckExit(self, _state):
+		self.flagCheckExit = _state
 
 
 
