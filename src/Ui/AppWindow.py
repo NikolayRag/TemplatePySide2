@@ -43,6 +43,9 @@ class AppWindow(QObject):
 	modulePath= path.abspath(path.dirname(__file__))
 
 
+	#support for window size/pos while maximized issue
+	rtSize = [None, None]
+	rtPos = [None, None]
 
 
 	wMain = None
@@ -61,7 +64,34 @@ class AppWindow(QObject):
 			return True
 
 
+
 ########## -support
+
+
+
+#specific logic relying on QT events order
+# for (re)storing "true" window size/pos while maximized
+	def moved(self, _e):
+		if self.rtPos[1] != None:
+			self.rtPos[0] = self.rtPos[1]
+			self.rtPos[1] = self.wMain.pos()
+		else:
+			self.rtPos[1] = self.rtPos[0]
+
+
+
+	def resized(self, _e):
+		if self.rtSize[1] != None:
+			self.rtSize[0] = self.rtSize[1]
+			self.rtSize[1] = self.wMain.size()
+		else:
+			self.rtSize[1] = self.rtSize[0]
+
+
+	def maximized(self, _e):
+		if self.wMain.isMaximized():
+			self.rtSize[1] = self.rtSize[0]
+			self.rtPos[1] = self.rtPos[0]
 
 
 
@@ -88,8 +118,12 @@ class AppWindow(QObject):
 		uiFile = path.join(self.modulePath,'AppWindow.ui')
 		cMain = self.wMain = QUiLoader().load(uiFile)
 
+
 		BindFilter({
 				QEvent.Close: self.tryExit,
+				QEvent.Move: self.moved,
+				QEvent.Resize: self.resized,
+				QEvent.WindowStateChange: self.maximized,
 		 	},
 		 	cMain
 		 )
@@ -126,3 +160,20 @@ class AppWindow(QObject):
 	def setContent(self, _content):
 		self.wContent.setText(_content)
 
+
+
+	def windowGeometry(self, _size=None, _pos=None, maximize=None):
+		if _size!=None and _pos!=None:
+			self.wMain.resize( _size )
+
+			self.wMain.move( _pos )
+
+			if maximize:
+				self.wMain.showMaximized()
+
+			#marker values to pass to following events
+			self.rtSize = [_size,None]
+			self.rtPos = [_pos,None]
+
+
+		return [self.rtSize[1], self.rtPos[1], self.wMain.isMaximized()]
