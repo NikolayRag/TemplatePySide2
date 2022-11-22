@@ -17,9 +17,6 @@ Definition is:
 	Args(prefs, iniFile='AppName', cmdlineBlock='')
 
 
-Commandline arguments are defined within cmdlineBlock block,
- and override defaults and .ini file if specified.
-
 Then property is read and assigned directly, saved to .ini file as assigned:
 
 	tmp = Args.Blockname.Property
@@ -29,6 +26,9 @@ Access to Property subsequental data by:
 
 	Args.Blockname._getData()
 
+Commandline block specfied by cmdlineBlock which are all arbitrary in form of
+	-var=val
+and is not saved to .ini file at all.
 
 '''
 
