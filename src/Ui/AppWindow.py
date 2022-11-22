@@ -118,6 +118,12 @@ class AppWindow(QObject):
 
 
 
+	def setStyle(self, _styleFile):
+		with open(_styleFile) as fQss:
+			self.wMain.setStyleSheet(fQss.read())
+
+
+
 	def setContent(self, _content):
 		self.wContent.setText(_content)
 

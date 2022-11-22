@@ -4,6 +4,9 @@ from .AppWindow import *
 
 
 class Ui():
+	modulePath= path.abspath(path.dirname(__file__))
+
+
 	qApp = None
 
 	appWindow = None
@@ -17,6 +20,7 @@ class Ui():
 
 		#init
 		self.appWindow = AppWindow(Args.Cmdline.tool)
+		self.appWindow.setStyle(f"{self.modulePath}/schemes/default.qss")
 		self.appWindow.setContent(Args.Cmdline.msg)
 
 
