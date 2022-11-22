@@ -11,36 +11,11 @@ from .BindFilter import *
 
 
 
-'''
-Draggable support example
-'''
-class QWinFilter(QObject):
-	mouseOffset= None
-
-	def __init__(self, _base):
-		super().__init__(_base)
-
-
-	def eventFilter(self, obj, event):
-		if event.type() == QEvent.MouseButtonPress:
-			self.mouseOffset= event.globalPos()-obj.window().pos()
-			return True
-
-		if event.type() == QEvent.MouseButtonRelease:
-			self.mouseOffset= False
-			return True
-
-		if event.type() == QEvent.MouseMove and self.mouseOffset:
-			obj.window().move(event.globalPos()-self.mouseOffset)
-			return True
-			
-		return False
-
-
-
-
 class AppWindow(QObject):
 	modulePath= path.abspath(path.dirname(__file__))
+
+
+	mouseGrabOffset= None
 
 
 	#support for window size/pos while maximized issue
@@ -114,6 +89,15 @@ class AppWindow(QObject):
 
 
 
+#toolwindow mouse drag support
+	def mouseGrab(self, _offset=None):
+		self.mouseGrabOffset = None
+
+		if _offset:
+			self.mouseGrabOffset = _offset - self.wMain.pos()
+
+
+
 #########
 
 
@@ -143,11 +127,19 @@ class AppWindow(QObject):
 
 		
 
-		#update widgets state
 		if _isTool:
+			logging.warning('Tool mode')
+
 			cMain.setWindowFlags(Qt.FramelessWindowHint)
 
-			self.wCaption.installEventFilter( QWinFilter(cMain) )
+			BindFilter({
+					QEvent.MouseButtonPress: lambda e: self.mouseGrab(e.globalPos()),
+					QEvent.MouseButtonRelease: lambda e: self.mouseGrab(),
+					QEvent.MouseMove: lambda e: self.mouseGrabOffset and self.wMain.move(e.globalPos()-self.mouseGrabOffset)
+			 	},
+			 	cMain
+		 	)
+
 
 
 		if _isDnd:
