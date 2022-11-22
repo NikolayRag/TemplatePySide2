@@ -119,7 +119,7 @@ class AppWindow(QObject):
 
 
 		#capture widgets
-		self.wCaption= cMain.findChild(QWidget, "outerFrame")
+		self.wCaption= cMain.findChild(QWidget, "frameCaption")
 
 		self.wContent= cMain.findChild(QWidget, "labContent")
 
@@ -137,6 +137,10 @@ class AppWindow(QObject):
 			 	},
 			 	cMain
 		 	)
+
+		else:
+		 	self.wCaption.hide()
+
 
 
 
