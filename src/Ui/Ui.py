@@ -28,7 +28,7 @@ class Ui():
 
 	def initTray(self, _win):
 		self.trayIcon = QSystemTrayIcon(QIcon(self.resIcon))
-		self.trayIcon.activated.connect(lambda r: r==QSystemTrayIcon.Trigger and _win.miniTray(False))
+		self.trayIcon.activated.connect(_win.miniTray)
 
 		self.trayIcon.show()
 

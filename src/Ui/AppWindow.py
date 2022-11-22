@@ -144,7 +144,7 @@ class AppWindow(QObject):
 
 		if isTray: #override minimize
 			BindFilter({
-					QEvent.WindowStateChange: lambda e: self.wMain.isMinimized() and self.miniTray(True),
+					QEvent.WindowStateChange: lambda e: self.miniTray(),
 			 	},
 			 	cMain
 			 )
@@ -167,13 +167,17 @@ class AppWindow(QObject):
 	
 
 
-	def miniTray(self, _state):
-		if _state:
+	#slot for tray minimize/restore only
+	def miniTray(self, _reason=None):
+		if _reason == None and self.wMain.isMinimized():
 			logging.warning('to tray')
+
 			QTimer.singleShot(0, self.wMain.hide)
 
-		else:
+
+		if _reason == QSystemTrayIcon.Trigger:
 			logging.warning('from tray')
+
 			self.show()
 			self.wMain.showNormal()
 
