@@ -12,6 +12,7 @@ AppPrefs = {
 		'tool': [0],
 		'tray': [0],
 		'dnd': [0],
+		'hold': [0],
 		'msg': ['pwned'],
 	}
 }

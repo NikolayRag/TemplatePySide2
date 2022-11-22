@@ -50,6 +50,8 @@ class Ui():
 		)
 		appWindow.windowGeometry(cSize, cPos, Args.Application.wMaxi)
 
+		appWindow.setCheckExit(Args.Cmdline.hold)
+
 
 		return appWindow
 
