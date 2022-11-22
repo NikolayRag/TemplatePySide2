@@ -6,9 +6,6 @@ from PySide2.QtWidgets import *
 from PySide2.QtUiTools import *
 
 
-class Object():
-	None
-
 
 
 '''
@@ -42,12 +39,11 @@ class QWinFilter(QObject):
 class AppWindow():
 	qApp = None
 
-	layout = Object()
-	layout.main = None
-	layout.drag = None
-	layout.content = None
 
 	modulePath= path.abspath(path.dirname(__file__))
+	wMain = None
+	wCaption = None
+	wContent = None
 
 
 
@@ -56,13 +52,13 @@ class AppWindow():
 		self.qApp.setStyle(QStyleFactory.create('plastique'))
 
 		uiFile = path.join(self.modulePath,'AppWindow.ui')
-		cMain = self.layout.main = QUiLoader().load(uiFile)
+		cMain = self.wMain = QUiLoader().load(uiFile)
 
 
 		#capture widgets
-		self.layout.drag= cMain.findChild(QWidget, "outerFrame")
+		self.wCaption= cMain.findChild(QWidget, "outerFrame")
 
-		self.layout.content= cMain.findChild(QWidget, "labContent")
+		self.wContent= cMain.findChild(QWidget, "labContent")
 
 		
 
@@ -70,7 +66,7 @@ class AppWindow():
 		if _isTool:
 			cMain.setWindowFlags(Qt.FramelessWindowHint)
 
-			self.layout.drag.installEventFilter( QWinFilter(cMain) )
+			self.wCaption.installEventFilter( QWinFilter(cMain) )
 
 
 
@@ -80,12 +76,12 @@ class AppWindow():
 	Display UI and enter QT app loop
 	'''
 	def exec(self):
-		self.layout.main.show()
+		self.wMain.show()
 
 
 		self.qApp.exec_()
 
 
 	def setContent(self, _content):
-		self.layout.content.setText(_content)
+		self.wContent.setText(_content)
 
