@@ -4,7 +4,7 @@ import Ui
 from Args import *
 
 
-AppName = 'TemplatePySide'
+AppName = 'TemplatePySide2'
 
 
 AppPrefs = {
