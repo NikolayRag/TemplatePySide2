@@ -4,11 +4,9 @@ from .AppWindow import *
 
 
 class Ui():
-	modulePath= path.abspath(path.dirname(__file__))
-
-	resUi = path.join(modulePath,'AppWindow.ui')
-	resIcon = path.join(modulePath,'icons/icon-app.svg')
-	resStyle = path.join(modulePath,'styles/default.qss')
+	resUi = None
+	resIcon = None
+	resStyle = None
 
 
 	qApp = None
@@ -65,7 +63,11 @@ class Ui():
 
 
 
-	def __init__(self, appName=None):
+	def __init__(self, appName=None, resUi=None, resIcon=None, resStyle=None):
+		self.resUi = resUi
+		self.resIcon = resIcon
+		self.resStyle = resStyle
+
 		self.initApp(appName)
 
 
