@@ -9,6 +9,7 @@ AppName = 'TemplatePySide2'
 
 AppPrefs = {
 	'Application': {
+		'wFactor': [.8],
 		'wSize': [None],
 		'wPos': [None],
 		'wMaxi': [False],

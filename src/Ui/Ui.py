@@ -32,11 +32,14 @@ class Ui():
 
 
 	def windowStart(self):
+		screenWH = QApplication.primaryScreen().size()
+
+		margin = screenWH *(1-Args.Application.wFactor) *.5
 		cPos = Args.Application.wPos and QPoint(*Args.Application.wPos)
-		cPos = cPos or QPoint(0,0)
+		cPos = cPos or ( QPoint(margin.width(), margin.height()) )
 
 		cSize = Args.Application.wSize and QSize(*Args.Application.wSize)
-		cSize = cSize or QApplication.primaryScreen().size()
+		cSize = cSize or screenWH *Args.Application.wFactor
 
 
 		appWindow = AppWindow(
