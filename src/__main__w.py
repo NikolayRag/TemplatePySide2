@@ -2,6 +2,9 @@ import Ui
 from Args import *
 
 
+AppName = 'TemplatePySide'
+
+
 AppPrefs = {
 	'Application': {
 		'wSize': [None],
@@ -18,6 +21,6 @@ AppPrefs = {
 }
 
 if __name__ == '__main__':
-	Args(AppPrefs, 'TemplatePySide', 'Cmdline')
+	Args(AppPrefs, AppName, cmdlineBlock='Cmdline')
 
-	Ui.Ui('TemplatePySide')
+	Ui.Ui(AppName)
