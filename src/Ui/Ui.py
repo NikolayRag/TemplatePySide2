@@ -20,7 +20,10 @@ class Ui():
 	def initApp(self, _appName):
 		self.qApp = QApplication()
 		self.qApp.setStyle(QStyleFactory.create('fusion'))
-		self.qApp.setWindowIcon(QIcon(self.resIcon))
+		
+		if self.resIcon:
+			self.qApp.setWindowIcon(QIcon(self.resIcon))
+		
 		if _appName:
 			self.qApp.setApplicationName(_appName)
 
