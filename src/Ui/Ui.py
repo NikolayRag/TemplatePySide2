@@ -66,6 +66,10 @@ class Ui():
 
 
 
+##### PUBLIC
+
+
+
 	def __init__(self, _resUi, appName=None, fileIcon=None, fileStyle=None):
 		self.initApp(appName, fileIcon)
 
