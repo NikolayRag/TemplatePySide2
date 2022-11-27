@@ -8,8 +8,8 @@ AppName = 'TemplatePySide2'
 
 
 AppPrefs = {
-	'Application': {
-		'wFactor': [.8],
+	'Application': { #window state holder
+		'wFactor': [.8], #fraction of app over screen at first run
 		'wSize': [None],
 		'wPos': [None],
 		'wMaxi': [False],
@@ -19,6 +19,7 @@ AppPrefs = {
 		'tray': [0],
 		'dnd': [0],
 		'hold': [0],
+		'style': ['fusion'],
 		'msg': ['pwned'],
 	}
 }

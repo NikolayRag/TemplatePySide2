@@ -101,7 +101,7 @@ class AppWindow(QObject):
 
 
 
-#########
+######### PUBLIC
 
 
 
