@@ -71,8 +71,8 @@ class Ui():
 
 
 
-	def __init__(self, appName=None, resUi=None, resIcon=None, resStyle=None):
-		self.resUi = resUi
+	def __init__(self, _resUi, appName=None, resIcon=None, resStyle=None):
+		self.resUi = _resUi
 		self.resIcon = resIcon
 		self.resStyle = resStyle
 
