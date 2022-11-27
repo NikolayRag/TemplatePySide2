@@ -11,6 +11,8 @@ class Ui():
 
 	qApp = None
 
+	appWin = None
+
 	trayIcon = None
 
 
@@ -74,20 +76,26 @@ class Ui():
 		self.initApp(appName)
 
 
-		appWin = self.windowStart()
+		self.appWin = self.windowStart()
+
 		if Args.Cmdline.tray:
 			self.initTray()
 
-			self.trayIcon.activated.connect(appWin.miniTray)
+			self.trayIcon.activated.connect(self.appWin.miniTray)
 
 
-		appWin.setContent(Args.Cmdline.msg)
 
-		appWin.show()
+	def setup(self, _content):
+		self.appWin.setContent(_content)
+
+
+
+	def go(self):
+		self.appWin.show()
 
 		self.qApp.exec_()
 
-		self.windowSave(appWin)
+		self.windowSave(self.appWin)
 
 
 		logging.warning('Exiting')
