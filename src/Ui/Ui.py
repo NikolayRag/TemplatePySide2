@@ -12,9 +12,9 @@ class Ui():
 
 
 
-	def initApp(self, _appName, _appIcon):
+	def initApp(self, _appName, _appIcon, _style):
 		self.qApp = QApplication()
-		self.qApp.setStyle(QStyleFactory.create('fusion'))
+		self.qApp.setStyle(QStyleFactory.create(_style))
 		
 		if _appIcon:
 			self.qApp.setWindowIcon(QIcon(_appIcon))
@@ -71,7 +71,7 @@ class Ui():
 
 
 	def __init__(self, _resUi, appName=None, fileIcon=None, fileStyle=None):
-		self.initApp(appName, fileIcon)
+		self.initApp(appName, fileIcon, Args.Cmdline.style)
 
 
 		self.appWin = self.windowStart(_resUi, fileStyle)
