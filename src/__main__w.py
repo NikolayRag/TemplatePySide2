@@ -1,14 +1,14 @@
 from os import path
 
-import Ui
+import Uiui
 
 from Args import *
 
 
 
-class AppWindowLocal(Ui.AppWindow):
+class AppWindowLocal(Uiui.AppWindow):
 	def __init__(self, fileUi, fileStyle=None, isTray=False, isTool=False, isDnd=False):
-		Ui.AppWindow.__init__(self, fileUi, fileStyle, isTray, isTool, isDnd)
+		Uiui.AppWindow.__init__(self, fileUi, fileStyle, isTray, isTool, isDnd)
 
 
 
@@ -43,7 +43,7 @@ resStyle = path.join(modulePath,'Ui/styles/default.qss')
 if __name__ == '__main__':
 	Args(AppPrefs, AppName, cmdlineBlock='Cmdline')
 
-	cUi = Ui.Ui(AppName, resIcon)
+	cUi = Uiui.Ui(AppName, resIcon)
 
 	appWindow = AppWindowLocal(
 		resUi,
