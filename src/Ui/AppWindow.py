@@ -202,7 +202,7 @@ class AppWindow(QObject):
 
 
 
-	def setContent(self, _content):
+	def setupWin(self, _content):
 		self.wContent.setText(_content)
 
 

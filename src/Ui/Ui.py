@@ -6,7 +6,7 @@ from .AppWindow import *
 class Ui():
 	qApp = None
 
-	appWin = None
+	appWindow = None
 
 	trayIcon = None
 
@@ -31,7 +31,10 @@ class Ui():
 
 
 
-	def windowStart(self, _fileUi, _fileStyle):
+	def windowStart(self, _appWindow):
+		self.appWindow = _appWindow
+
+
 		screenWH = QApplication.primaryScreen().size()
 
 		margin = screenWH *(1-Args.Application.wFactor) *.5
@@ -42,19 +45,9 @@ class Ui():
 		cSize = cSize or screenWH *Args.Application.wFactor
 
 
-		appWindow = AppWindow(
-			_fileUi,
-			fileStyle=_fileStyle,
-			isTool=Args.Cmdline.tool,
-			isTray=Args.Cmdline.tray,
-			isDnd=Args.Cmdline.dnd
-		)
-		appWindow.windowGeometry(cSize, cPos, Args.Application.wMaxi)
+		self.appWindow.windowGeometry(cSize, cPos, Args.Application.wMaxi)
 
-		appWindow.setCheckExit(Args.Cmdline.hold)
-
-
-		return appWindow
+		self.appWindow.setCheckExit(Args.Cmdline.hold)
 
 
 
@@ -70,30 +63,29 @@ class Ui():
 
 
 
-	def __init__(self, _resUi, appName=None, fileIcon=None, fileStyle=None):
+	def __init__(self, appName=None, fileIcon=None):
 		self.initApp(appName, fileIcon, Args.Cmdline.style)
 
-
-		self.appWin = self.windowStart(_resUi, fileStyle)
 
 		if Args.Cmdline.tray:
 			self.initTray(fileIcon)
 
-			self.trayIcon.activated.connect(self.appWin.miniTray)
 
 
+	def setupWin(self, _window):
+		self.windowStart(_window)
+		self.trayIcon and self.trayIcon.activated.connect(self.appWindow.miniTray)
 
-	def setup(self, _content):
-		self.appWin.setContent(_content)
+		return self.appWindow.setupWin
 
 
-
+		
 	def go(self):
-		self.appWin.show()
+		self.appWindow.show()
 
 		self.qApp.exec_()
 
-		self.windowSave(self.appWin)
+		self.windowSave(self.appWindow)
 
 
 		logging.warning('Exiting')

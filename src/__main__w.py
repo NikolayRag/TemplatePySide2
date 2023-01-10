@@ -1,7 +1,15 @@
 from os import path
 
 import Ui
+
 from Args import *
+
+
+
+class AppWindowLocal(Ui.AppWindow):
+	def __init__(self, fileUi, fileStyle=None, isTray=False, isTool=False, isDnd=False):
+		Ui.AppWindow.__init__(self, fileUi, fileStyle, isTray, isTool, isDnd)
+
 
 
 AppName = 'TemplatePySide2'
@@ -35,6 +43,15 @@ resStyle = path.join(modulePath,'Ui/styles/default.qss')
 if __name__ == '__main__':
 	Args(AppPrefs, AppName, cmdlineBlock='Cmdline')
 
-	cUi = Ui.Ui(resUi, AppName, resIcon, resStyle)
-	cUi.setup(Args.Cmdline.msg)
+	cUi = Ui.Ui(AppName, resIcon)
+
+	appWindow = AppWindowLocal(
+		resUi,
+		fileStyle=resStyle,
+		isTool=Args.Cmdline.tool,
+		isTray=Args.Cmdline.tray,
+		isDnd=Args.Cmdline.dnd
+	)
+	cUi.setupWin(appWindow)(Args.Cmdline.msg)
+
 	cUi.go()
