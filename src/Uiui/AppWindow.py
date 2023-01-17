@@ -180,7 +180,8 @@ class AppWindow(QObject):
 
 		self.wMain.close()
 
-		self.wMain.setVisible(isVis)
+		if self.wMain.isVisible():
+			self.wMain.setVisible(isVis)
 
 	
 
