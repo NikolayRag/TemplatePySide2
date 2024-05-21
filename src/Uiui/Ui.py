@@ -38,7 +38,7 @@ class Ui():
 
 
 
-	def windowStart(self, _appWindow):
+	def initWindow(self, _appWindow):
 		self.appWindow = _appWindow
 
 
@@ -80,7 +80,8 @@ class Ui():
 
 
 	def setupWin(self, _window):
-		self.windowStart(_window)
+		self.initWindow(_window)
+
 		if self.trayIcon:
 			self.trayIcon.activated.connect(self.appWindow.miniTray)
 
