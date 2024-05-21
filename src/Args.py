@@ -112,8 +112,15 @@ class Args():
 	def _parseCmdline(self, _args):
 		cParser = argparse.ArgumentParser()
 
-		for cVar in _args._getData():
-			cParser.add_argument(f"-{cVar}", default=getattr(_args, cVar), type=type(cVar))
+		argsData = _args._getData()
+
+		for cVar in argsData:
+			cVal = getattr(_args, cVar)
+			cType = type(cVal)
+			if len(argsData[cVar])>1 and type(argsData[cVar][1])==type:
+				cType = argsData[cVar][1]
+
+			cParser.add_argument(f"-{cVar}", default=cVal, type=cType)
 		
 		try:
 			cArgs = cParser.parse_args()
