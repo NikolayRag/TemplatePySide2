@@ -21,7 +21,6 @@ class AppWindow(QObject):
 
 	wMain = None
 	wCaption = None
-	wContent = None
 
 
 	flagCheckExit = True
@@ -127,8 +126,6 @@ class AppWindow(QObject):
 		#capture widgets
 		self.wCaption= cMain.findChild(QWidget, "frameCaption")
 
-		self.wContent= cMain.findChild(QWidget, "labContent")
-
 		
 
 		if isTool:
@@ -217,7 +214,7 @@ class AppWindow(QObject):
 
 
 	def setupWin(self, _content):
-		self.wContent.setText(_content)
+		None
 
 
 
