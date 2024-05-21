@@ -87,9 +87,6 @@ class Ui():
 			self.actionQuit.triggered.connect(self.appWindow.close)
 
 
-		return self.appWindow.setupWin
-
-
 		
 	def go(self):
 		self.appWindow.show()

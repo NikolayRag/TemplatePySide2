@@ -52,6 +52,8 @@ if __name__ == '__main__':
 		isTray=Args.Cmdline.tray,
 		isDnd=Args.Cmdline.dnd
 	)
-	cUi.setupWin(appWindow)(Args.Cmdline.msg)
+	appWindow.setupWin(Args.Cmdline.msg)
+
+	cUi.setupWin(appWindow)
 
 	cUi.go()
