@@ -52,6 +52,11 @@ class ArgBlock():
 			self._setData(n, d)
 
 
+	'''
+	Args._save() function is stored here to be triggered at any change.
+	It then stores every ArgBlock, not only this one.
+	Kinda tricky, but working ok.
+	'''
 	def _setCB(self, _cb):
 		self._saveCB = _cb
 
@@ -140,6 +145,7 @@ class Args():
 
 	'''
 	Save current settings to application related file.
+	Triggered at any ArgsBlock value change.
 	'''
 	def _save(self):
 		saveData = {}
