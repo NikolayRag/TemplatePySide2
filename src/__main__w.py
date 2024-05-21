@@ -29,9 +29,9 @@ AppPrefs = {
 
 
 modulePath= path.abspath(path.dirname(__file__))
-resUi = path.join(modulePath,'Ui/AppWindow.ui')
-resIcon = path.join(modulePath,'Ui/icons/icon-app.svg')
-resStyle = path.join(modulePath,'Ui/styles/default.qss')
+resUi = path.join(modulePath,'Resource/AppWindow.ui')
+resIcon = path.join(modulePath,'Resource/icons/icon-app.svg')
+resStyle = path.join(modulePath,'Resource/styles/default.qss')
 
 
 
