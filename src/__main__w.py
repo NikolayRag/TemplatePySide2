@@ -18,6 +18,7 @@ AppPrefs = {
 		'wMaxi': [False],
 	},
 	'Cmdline': {
+		'loglevel': [10,[0,50],int,"Logging level"],
 		'tool': [0],
 		'tray': [0],
 		'dnd': [0],
@@ -37,6 +38,9 @@ resStyle = path.join(modulePath,'Resource/styles/default.qss')
 
 if __name__ == '__main__':
 	Args(AppPrefs, AppName, cmdlineBlock='Cmdline')
+	logging.basicConfig(level=Args.Cmdline.loglevel)
+	
+
 
 	cUi = Ui.Ui(AppName, resIcon)
 
