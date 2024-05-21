@@ -79,7 +79,7 @@ class Ui():
 
 
 
-	def setupWin(self, _window):
+	def setupUi(self, _window):
 		self.initWindow(_window)
 
 		if self.trayIcon:

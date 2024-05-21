@@ -54,6 +54,6 @@ if __name__ == '__main__':
 	)
 	appWindow.setupWin(Args.Cmdline.msg)
 
-	cUi.setupWin(appWindow)
+	cUi.setupUi(appWindow)
 
 	cUi.go()
