@@ -1,14 +1,9 @@
 from os import path
 
 import Uiui
+from Uiui.myLittleWin import *
 
 from Args import *
-
-
-
-class AppWindowLocal(Uiui.AppWindow):
-	def __init__(self, fileUi, fileStyle=None, isTray=False, isTool=False, isDnd=False):
-		Uiui.AppWindow.__init__(self, fileUi, fileStyle, isTray, isTool, isDnd)
 
 
 
@@ -45,7 +40,7 @@ if __name__ == '__main__':
 
 	cUi = Uiui.Ui(AppName, resIcon)
 
-	appWindow = AppWindowLocal(
+	appWindow = myLittleWin(
 		resUi,
 		fileStyle=resStyle,
 		isTool=Args.Cmdline.tool,
