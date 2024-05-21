@@ -13,6 +13,8 @@ class Ui():
 
 
 	def initApp(self, _appName, _appIcon, _style):
+		logging.info(f"QT styles available: {QStyleFactory.keys()}")
+
 		self.qApp = QApplication()
 		self.qApp.setStyle(QStyleFactory.create(_style))
 		
