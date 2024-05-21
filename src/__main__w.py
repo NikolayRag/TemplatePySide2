@@ -1,7 +1,7 @@
 from os import path
 
-import Uiui
-from Uiui.myLittleWin import *
+import Ui
+from Ui.myLittleWin import *
 
 from Args import *
 
@@ -38,7 +38,7 @@ resStyle = path.join(modulePath,'Resource/styles/default.qss')
 if __name__ == '__main__':
 	Args(AppPrefs, AppName, cmdlineBlock='Cmdline')
 
-	cUi = Uiui.Ui(AppName, resIcon)
+	cUi = Ui.Ui(AppName, resIcon)
 
 	appWindow = myLittleWin(
 		resUi,

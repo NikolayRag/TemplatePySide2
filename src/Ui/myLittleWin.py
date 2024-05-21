@@ -1,4 +1,4 @@
-import Uiui
+import Ui
 
 from PySide2.QtWidgets import *
 
@@ -7,13 +7,13 @@ from PySide2.QtWidgets import *
 '''
 Example App window
 '''
-class myLittleWin(Uiui.AppWindow):
+class myLittleWin(Ui.AppWindow):
 	wContent = None
 
 
 
 	def __init__(self, fileUi, fileStyle=None, isTray=False, isTool=False, isDnd=False):
-		Uiui.AppWindow.__init__(self, fileUi, fileStyle, isTray, isTool, isDnd)
+		Ui.AppWindow.__init__(self, fileUi, fileStyle, isTray, isTool, isDnd)
 
 		self.wContent= self.wMain.findChild(QWidget, "labContent")
 
