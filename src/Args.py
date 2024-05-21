@@ -1,3 +1,5 @@
+#  todo 4 (commandline) +0: add "store_true" arguments
+#  todo 5 (commandline) +0: change args properies to predefined (type, list, etc.)
 '''
 App settings singletone.
 
