@@ -119,8 +119,9 @@ class Args():
 			cType = type(cVal)
 			if len(argsData[cVar])>1 and type(argsData[cVar][1])==type:
 				cType = argsData[cVar][1]
-
-			cParser.add_argument(f"-{cVar}", default=cVal, type=cType)
+			cHelp = argsData[cVar][2] if len(argsData[cVar])>2 else None
+			
+			cParser.add_argument(f"-{cVar}", default=cVal, type=cType, help=cHelp)
 		
 		try:
 			cArgs = cParser.parse_args()
